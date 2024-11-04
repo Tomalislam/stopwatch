@@ -1,59 +1,55 @@
 let startTime;
 let timerInterval;
-let currentSeconds = 29 * 60 + 8; // Default starting time in seconds
+let elapsedTime = 0; // Time in milliseconds
 let isRunning = false;
 
-function updateTimerDisplay() {
-    const minutes = Math.floor(currentSeconds / 60).toString().padStart(2, '0');
-    const seconds = (currentSeconds % 60).toString().padStart(2, '0');
-    document.getElementById('timer').textContent = `00:${minutes}:${seconds}`;
+function updateStopwatchDisplay() {
+    const totalSeconds = Math.floor(elapsedTime / 1000);
+    const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
+    const minutes = Math.floor((totalSeconds % 3600) / 60).toString().padStart(2, '0');
+    const seconds = (totalSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('stopwatch').textContent = `${hours}:${minutes}:${seconds}`;
 }
 
-function startTimer() {
-    startTime = new Date();
+function startStopwatch() {
+    startTime = Date.now() - elapsedTime;
     timerInterval = setInterval(() => {
-        if (currentSeconds > 0) {
-            currentSeconds--;
-            updateTimerDisplay();
-        } else {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            document.getElementById('control').textContent = 'Continue';
-            isRunning = false;
-        }
+        elapsedTime = Date.now() - startTime;
+        updateStopwatchDisplay();
     }, 1000);
     document.getElementById('control').textContent = 'Pause';
     isRunning = true;
 }
 
-function pauseTimer() {
+function pauseStopwatch() {
     clearInterval(timerInterval);
-    timerInterval = null;
-    document.getElementById('control').textContent = 'Continue';
+    document.getElementById('control').textContent = 'Start';
     isRunning = false;
 }
 
 document.getElementById('control').addEventListener('click', () => {
     if (isRunning) {
-        pauseTimer();
+        pauseStopwatch();
     } else {
-        startTimer();
+        startStopwatch();
     }
 });
 
 document.getElementById('reset').addEventListener('click', () => {
-    const endTime = new Date();
-    const logEntry = document.createElement('div');
-    logEntry.className = 'log-entry';
-    logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Start: ${startTime ? startTime.toLocaleTimeString() : 'N/A'} | End: ${endTime.toLocaleTimeString()}`;
-    document.getElementById('log').appendChild(logEntry);
-    document.getElementById('clear-log').style.display = 'inline-block';
+    if (elapsedTime > 0) {
+        const endTime = new Date();
+        const logEntry = document.createElement('div');
+        logEntry.className = 'log-entry';
+        logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Elapsed Time: ${document.getElementById('stopwatch').textContent}`;
+        document.getElementById('log').appendChild(logEntry);
+        document.getElementById('clear-log').style.display = 'inline-block';
+    }
 
     clearInterval(timerInterval);
     timerInterval = null;
-    currentSeconds = 29 * 60 + 8; // Keep original time
-    updateTimerDisplay();
-    document.getElementById('control').textContent = 'Continue';
+    elapsedTime = 0;
+    updateStopwatchDisplay();
+    document.getElementById('control').textContent = 'Start';
     isRunning = false;
 });
 
@@ -62,4 +58,4 @@ document.getElementById('clear-log').addEventListener('click', () => {
     document.getElementById('clear-log').style.display = 'none';
 });
 
-updateTimerDisplay();//hi
+updateStopwatchDisplay();
