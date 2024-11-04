@@ -102,4 +102,24 @@ button {
     .button-container {
         flex-direction: column; /* Stack buttons vertically on small screens */
     }
+    @keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#animation-circle {
+    width: 100px;
+    height: 100px;
+    border: 8px solid #38d9a9;
+    border-top: 8px solid transparent;
+    border-radius: 50%;
+    margin-top: 20px;
+    animation: rotate 2s linear infinite;
+    display: none; /* Hidden by default */
+}
+
 }
