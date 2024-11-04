@@ -56,7 +56,7 @@ document.getElementById('reset').addEventListener('click', () => {
         const endTime = new Date();
         const logEntry = document.createElement('div');
         logEntry.className = 'log-entry';
-        logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Elapsed Time: ${document.getElementById('stopwatch').textContent}`;
+        logEntry.textContent = `${endTime.toLocaleString()} | Total Time: ${document.getElementById('stopwatch').textContent}`;
         document.getElementById('log').appendChild(logEntry);
         document.getElementById('clear-log').style.display = 'inline-block';
 
