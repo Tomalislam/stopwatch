@@ -12,7 +12,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 40rem; /* Large size for desktops */
+    font-size: 35rem; /* Large size for desktops */
     margin-bottom: 20px;
     text-align: center;
     width: 100%;
