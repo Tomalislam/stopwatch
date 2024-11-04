@@ -22,13 +22,18 @@ button {
     border-radius: 5px;
 }
 
-#continue {
+#control {
     background-color: #38d9a9;
     color: white;
 }
 
 #reset {
     background-color: #e74c3c;
+    color: white;
+}
+
+#clear-log {
+    background-color: #f39c12;
     color: white;
 }
 
