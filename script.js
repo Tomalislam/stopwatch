@@ -1,51 +1,65 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
-    background-color: #1c1c1c;
-    color: #ccc;
-    font-family: Arial, sans-serif;
+let startTime;
+let timerInterval;
+let currentSeconds = 29 * 60 + 8; // Default starting time in seconds
+let isRunning = false;
+
+function updateTimerDisplay() {
+    const minutes = Math.floor(currentSeconds / 60).toString().padStart(2, '0');
+    const seconds = (currentSeconds % 60).toString().padStart(2, '0');
+    document.getElementById('timer').textContent = `00:${minutes}:${seconds}`;
 }
 
-#timer {
-    font-size: 5rem;
-    margin-bottom: 20px;
+function startTimer() {
+    startTime = new Date();
+    timerInterval = setInterval(() => {
+        if (currentSeconds > 0) {
+            currentSeconds--;
+            updateTimerDisplay();
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            document.getElementById('control').textContent = 'Continue';
+            isRunning = false;
+        }
+    }, 1000);
+    document.getElementById('control').textContent = 'Pause';
+    isRunning = true;
 }
 
-button {
-    margin: 5px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    border: none;
-    border-radius: 5px;
+function pauseTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+    document.getElementById('control').textContent = 'Continue';
+    isRunning = false;
 }
 
-#control {
-    background-color: #38d9a9;
-    color: white;
-}
+document.getElementById('control').addEventListener('click', () => {
+    if (isRunning) {
+        pauseTimer();
+    } else {
+        startTimer();
+    }
+});
 
-#reset {
-    background-color: #e74c3c;
-    color: white;
-}
+document.getElementById('reset').addEventListener('click', () => {
+    const endTime = new Date();
+    const logEntry = document.createElement('div');
+    logEntry.className = 'log-entry';
+    logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Start: ${startTime ? startTime.toLocaleTimeString() : 'N/A'} | End: ${endTime.toLocaleTimeString()}`;
+    document.getElementById('log').appendChild(logEntry);
+    document.getElementById('clear-log').style.display = 'inline-block';
 
-#clear-log {
-    background-color: #f39c12;
-    color: white;
-}
+    clearInterval(timerInterval);
+    timerInterval = null;
+    currentSeconds = 29 * 60 + 8; // Keep original time
+    updateTimerDisplay();
+    document.getElementById('control').textContent = 'Continue';
+    isRunning = false;
+});
 
-#log {
-    margin-top: 20px;
-    width: 90%;
-    max-width: 800px;
-}
+document.getElementById('clear-log').addEventListener('click', () => {
+    document.getElementById('log').innerHTML = '';
+    document.getElementById('clear-log').style.display = 'none';
+});
 
-.log-entry {
-    background-color: #2e2e2e;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 5px;
-}
+updateTimerDisplay();
