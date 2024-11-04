@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Timer with Logging</title>
+    <title>Stopwatch with Logging</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="timer">00:29:08</div>
-    <button id="control">Continue</button>
-    <button id="reset">Reset</button>
-    <button id="clear-log" style="display: none;">Reset Information</button>
+    <div id="stopwatch">00:00:00</div>
+    <div class="button-container">
+        <button id="control">Start</button>
+        <button id="reset">Reset</button>
+    </div>
+    <button id="clear-log" style="display: none;">Clear Log</button>
     <div id="log"></div>
     <script src="script.js"></script>
 </body>
-    
 </html>
