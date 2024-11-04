@@ -3,6 +3,21 @@ let timerInterval;
 let elapsedTime = 0; // Time in milliseconds
 let isRunning = false;
 
+// Load previous elapsed time and logs from localStorage
+window.addEventListener('load', () => {
+    if (localStorage.getItem('elapsedTime')) {
+        elapsedTime = parseInt(localStorage.getItem('elapsedTime'), 10);
+        updateStopwatchDisplay();
+    }
+
+    if (localStorage.getItem('log')) {
+        document.getElementById('log').innerHTML = localStorage.getItem('log');
+        if (document.getElementById('log').innerHTML !== '') {
+            document.getElementById('clear-log').style.display = 'inline-block';
+        }
+    }
+});
+
 function updateStopwatchDisplay() {
     const totalSeconds = Math.floor(elapsedTime / 1000);
     const hours = Math.floor(totalSeconds / 3600).toString().padStart(2, '0');
@@ -16,6 +31,7 @@ function startStopwatch() {
     timerInterval = setInterval(() => {
         elapsedTime = Date.now() - startTime;
         updateStopwatchDisplay();
+        localStorage.setItem('elapsedTime', elapsedTime.toString());
     }, 1000);
     document.getElementById('control').textContent = 'Pause';
     isRunning = true;
@@ -43,11 +59,15 @@ document.getElementById('reset').addEventListener('click', () => {
         logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Elapsed Time: ${document.getElementById('stopwatch').textContent}`;
         document.getElementById('log').appendChild(logEntry);
         document.getElementById('clear-log').style.display = 'inline-block';
+
+        // Save log to localStorage
+        localStorage.setItem('log', document.getElementById('log').innerHTML);
     }
 
     clearInterval(timerInterval);
     timerInterval = null;
     elapsedTime = 0;
+    localStorage.removeItem('elapsedTime'); // Clear elapsed time from storage
     updateStopwatchDisplay();
     document.getElementById('control').textContent = 'Start';
     isRunning = false;
@@ -56,6 +76,7 @@ document.getElementById('reset').addEventListener('click', () => {
 document.getElementById('clear-log').addEventListener('click', () => {
     document.getElementById('log').innerHTML = '';
     document.getElementById('clear-log').style.display = 'none';
+    localStorage.removeItem('log'); // Clear log from storage
 });
 
 // Initial display update
