@@ -1,42 +1,51 @@
-let startTime;
-let timerInterval;
-let currentSeconds = 29 * 60 + 8; // Default starting time in seconds
-
-function updateTimerDisplay() {
-    const minutes = Math.floor(currentSeconds / 60).toString().padStart(2, '0');
-    const seconds = (currentSeconds % 60).toString().padStart(2, '0');
-    document.getElementById('timer').textContent = `00:${minutes}:${seconds}`;
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #1c1c1c;
+    color: #ccc;
+    font-family: Arial, sans-serif;
 }
 
-function startTimer() {
-    startTime = new Date();
-    timerInterval = setInterval(() => {
-        if (currentSeconds > 0) {
-            currentSeconds--;
-            updateTimerDisplay();
-        } else {
-            clearInterval(timerInterval);
-        }
-    }, 1000);
+#timer {
+    font-size: 5rem;
+    margin-bottom: 20px;
 }
 
-document.getElementById('continue').addEventListener('click', () => {
-    if (!timerInterval) {
-        startTimer();
-    }
-});
+button {
+    margin: 5px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: none;
+    border-radius: 5px;
+}
 
-document.getElementById('reset').addEventListener('click', () => {
-    const endTime = new Date();
-    const logEntry = document.createElement('div');
-    logEntry.className = 'log-entry';
-    logEntry.textContent = `Reset on ${endTime.toLocaleString()} | Start: ${startTime ? startTime.toLocaleTimeString() : 'N/A'} | End: ${endTime.toLocaleTimeString()}`;
-    document.getElementById('log').appendChild(logEntry);
+#control {
+    background-color: #38d9a9;
+    color: white;
+}
 
-    clearInterval(timerInterval);
-    timerInterval = null;
-    currentSeconds = 29 * 60 + 8; // Reset to initial value
-    updateTimerDisplay();
-});
+#reset {
+    background-color: #e74c3c;
+    color: white;
+}
 
-updateTimerDisplay();
+#clear-log {
+    background-color: #f39c12;
+    color: white;
+}
+
+#log {
+    margin-top: 20px;
+    width: 90%;
+    max-width: 800px;
+}
+
+.log-entry {
+    background-color: #2e2e2e;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
