@@ -12,8 +12,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 30rem; /* Large size for desktops */
-    margin-bottom: 20px;
+    font-size: 27rem; /* Large size for desktops */
+    margin-bottom: 0px;
     text-align: center;
     width: 100%;
 }
