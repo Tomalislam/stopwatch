@@ -62,4 +62,4 @@ document.getElementById('clear-log').addEventListener('click', () => {
     document.getElementById('clear-log').style.display = 'none';
 });
 
-updateTimerDisplay();
+updateTimerDisplay();//hi
