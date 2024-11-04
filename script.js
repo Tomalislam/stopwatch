@@ -3,20 +3,10 @@ let timerInterval;
 let elapsedTime = 0; // Time in milliseconds
 let isRunning = false;
 
-// Load previous elapsed time and logs from localStorage
-window.addEventListener('load', () => {
-    if (localStorage.getItem('elapsedTime')) {
-        elapsedTime = parseInt(localStorage.getItem('elapsedTime'), 10);
-        updateStopwatchDisplay();
-    }
-
-    if (localStorage.getItem('log')) {
-        document.getElementById('log').innerHTML = localStorage.getItem('log');
-        if (document.getElementById('log').innerHTML !== '') {
-            document.getElementById('clear-log').style.display = 'inline-block';
-        }
-    }
-});
+// Reference to the animation element
+const animationCircle = document.createElement('div');
+animationCircle.id = 'animation-circle';
+document.body.appendChild(animationCircle);
 
 function updateStopwatchDisplay() {
     const totalSeconds = Math.floor(elapsedTime / 1000);
@@ -33,12 +23,21 @@ function startStopwatch() {
         updateStopwatchDisplay();
         localStorage.setItem('elapsedTime', elapsedTime.toString());
     }, 1000);
+
+    // Start animation
+    animationCircle.style.display = 'block';
+    animationCircle.style.animationPlayState = 'running';
+
     document.getElementById('control').textContent = 'Pause';
     isRunning = true;
 }
 
 function pauseStopwatch() {
     clearInterval(timerInterval);
+
+    // Pause animation
+    animationCircle.style.animationPlayState = 'paused';
+
     document.getElementById('control').textContent = 'Start';
     isRunning = false;
 }
@@ -59,8 +58,6 @@ document.getElementById('reset').addEventListener('click', () => {
         logEntry.textContent = `${endTime.toLocaleString()} | Total Time: ${document.getElementById('stopwatch').textContent}`;
         document.getElementById('log').appendChild(logEntry);
         document.getElementById('clear-log').style.display = 'inline-block';
-
-        // Save log to localStorage
         localStorage.setItem('log', document.getElementById('log').innerHTML);
     }
 
@@ -71,6 +68,9 @@ document.getElementById('reset').addEventListener('click', () => {
     updateStopwatchDisplay();
     document.getElementById('control').textContent = 'Start';
     isRunning = false;
+
+    // Hide animation
+    animationCircle.style.display = 'none';
 });
 
 document.getElementById('clear-log').addEventListener('click', () => {
