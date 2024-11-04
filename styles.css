@@ -1,8 +1,5 @@
 body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+
     height: 100vh;
     margin: 0;
     background-color: #1c1c1c;
@@ -12,7 +9,10 @@ body {
 }
 
 #stopwatch {
-    font-size: 20rem; /* Large size for desktops */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40rem; /* Large size for desktops */
     margin-bottom: 20px;
     text-align: center;
     width: 100%;
