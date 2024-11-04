@@ -90,7 +90,7 @@ button {
 
 @media (max-width: 480px) {
     #stopwatch {
-        font-size: 5rem; /* Even smaller for small phones */
+        font-size: 4rem; /* Even smaller for small phones */
     }
 
     button {
