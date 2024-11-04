@@ -29,9 +29,9 @@ body {
 button {
     margin: 5px;
     padding: 30px 60px; /* Adjusted padding for buttons */
-    font-size: 2rem;
+    font-size: 5rem;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
 }
 
