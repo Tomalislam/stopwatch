@@ -58,4 +58,5 @@ document.getElementById('clear-log').addEventListener('click', () => {
     document.getElementById('clear-log').style.display = 'none';
 });
 
+// Initial display update
 updateStopwatchDisplay();
