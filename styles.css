@@ -16,7 +16,7 @@ body {
     margin-bottom: 0px;
     text-align: center;
     width: 100%;
-    padding: 250px 0; /* উপরে এবং নিচে 250px, ডানে এবং বামে 0px */
+    padding: 200px 50px 0 0;
 }
 
 .button-container {
