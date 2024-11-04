@@ -4,22 +4,34 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
+    margin: 0;
     background-color: #1c1c1c;
     color: #ccc;
     font-family: Arial, sans-serif;
+    padding: 10px;
 }
 
 #stopwatch {
-    font-size: 20rem; /* Increased to 400% of original size */
+    font-size: 20rem; /* Large size for desktops */
     margin-bottom: 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 button {
     margin: 5px;
-    padding: 50px 100px; /* Increased to 500% of original size */
-    font-size: 2rem; /* Made font size bigger for better readability */
+    padding: 30px 60px; /* Adjusted padding for buttons */
+    font-size: 2rem;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 #control {
@@ -35,12 +47,15 @@ button {
 #clear-log {
     background-color: #f39c12;
     color: white;
+    margin-top: 10px;
+    display: none;
 }
 
 #log {
     margin-top: 20px;
-    width: 90%;
+    width: 100%;
     max-width: 800px;
+    overflow: auto;
 }
 
 .log-entry {
@@ -50,8 +65,40 @@ button {
     border-radius: 5px;
 }
 
-/* Style to align buttons side-by-side */
-.button-container {
-    display: flex;
-    gap: 10px; /* Adds space between buttons */
+/* Responsive Design */
+@media (max-width: 1200px) {
+    #stopwatch {
+        font-size: 15rem; /* Slightly smaller for tablets */
+    }
+
+    button {
+        padding: 20px 50px; /* Adjusted button size for tablets */
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    #stopwatch {
+        font-size: 10rem; /* Smaller for smaller tablets and large phones */
+    }
+
+    button {
+        padding: 15px 40px; /* Smaller button size for phones */
+        font-size: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #stopwatch {
+        font-size: 6rem; /* Even smaller for small phones */
+    }
+
+    button {
+        padding: 10px 30px; /* Smallest button size */
+        font-size: 1rem;
+    }
+
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
 }
