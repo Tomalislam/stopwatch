@@ -9,15 +9,15 @@ body {
     font-family: Arial, sans-serif;
 }
 
-#timer {
-    font-size: 5rem;
+#stopwatch {
+    font-size: 20rem; /* Increased to 400% of original size */
     margin-bottom: 20px;
 }
 
 button {
     margin: 5px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
+    padding: 50px 100px; /* Increased to 500% of original size */
+    font-size: 2rem; /* Made font size bigger for better readability */
     border: none;
     border-radius: 5px;
 }
@@ -48,4 +48,10 @@ button {
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
+}
+
+/* Style to align buttons side-by-side */
+.button-container {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
 }
